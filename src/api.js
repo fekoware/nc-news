@@ -14,3 +14,11 @@ export const fetchArticles = () => {
       console.log(err);
     });
 };
+
+export const fetchArticleById = (article_id) => {
+    return apiClient.get(`/articles/${article_id}`).then((response) => {
+        return response.data.article
+    }).catch((err) => {
+        console.log(err)
+    })
+}

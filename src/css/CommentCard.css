@@ -1,0 +1,15 @@
+.comment-card {
+
+    border: 1px solid blue;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.comments-list {
+    border: 1px solid blue;
+}
+
+ul  {
+    list-style-type: none;
+}
+

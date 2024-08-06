@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom"
+import "../css/ArticlesCard.css"
 
 export const ArticlesCard = ({article}) => {
     
 
   return (
     
-    <li className="article" key={article.article_id}>
+    <li className='article-card'key={article.article_id}>
         
     <Link to={`/${article.article_id}`}>
    <img src={article.article_img_url} />
@@ -18,6 +19,8 @@ export const ArticlesCard = ({article}) => {
    <p>{article.comment_count} comments </p>
    </Link>
  </li>
+
+    
   )
 
   

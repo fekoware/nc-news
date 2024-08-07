@@ -10,19 +10,17 @@ export const ArticleCommentsList = () => {
 
   useEffect(() => {
     fetchCommentsByArticleId(article_id).then((data) => {
-    console
-      setComments(data)
-      console.log(comments, "setted comments")
+      setComments(data);
     });
   }, [article_id]);
 
   return (
-      comments && (
-          <ul className='comments-list'>
-              {comments.map((comment) => (
-                  <CommentCard comment={comment} key={comment.comment_id} />
-              ))}
-          </ul>
-      )
-  )
+    comments && (
+      <ul className="comments-list">
+        {comments.map((comment) => (
+          <CommentCard comment={comment} key={comment.comment_id} />
+        ))}
+      </ul>
+    )
+  );
 };

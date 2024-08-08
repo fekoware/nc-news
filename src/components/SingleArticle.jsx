@@ -5,12 +5,14 @@ import { fetchArticleById, updateVotesByArticleId } from "../api";
 import { Link } from "react-router-dom";
 import { ArticleCommentsList } from "./ArticleCommentsList";
 import "../css/SingleArticle.css";
+import { Users } from "./Users";
 
 export const SingleArticle = () => {
   const { article_id } = useParams();
   const [article, setArticle] = useState("");
   const [count, setCount] = useState(0);
   const [error, setError] = useState(null);
+  const [comments, setComments] = useState("");
 
   useEffect(() => {
     fetchArticleById(article_id).then((data) => {
@@ -20,23 +22,23 @@ export const SingleArticle = () => {
 
   const incrementCount = (increment) => {
     setCount((currCount) => {
-      currCount = 0;
-      const newCount = currCount + increment;
       setError(null);
-      updateVotesByArticleId(article.article_id, newCount).catch((err) => {
-        //if unable to increment
-        setCount((currCount) => {
-          currCount - increment;
-          setError("Like unsuccesful, try again");
-        });
+
+      return currCount + increment;
+    });
+    updateVotesByArticleId(article.article_id, increment).catch((err) => {
+      //if unable to increment
+      setCount((currCount) => {
+        setError("Like unsuccesful, try again");
+        return currCount - increment;
       });
-      return newCount;
     });
   };
 
   return (
     <>
       <Link to="/">Go Back</Link>
+
       <img src={article.article_img_url} />
       <p>{article.author}</p>
       <p>{article.topic}</p>
@@ -52,7 +54,10 @@ export const SingleArticle = () => {
       <p>{article.comment_count} comments </p>
       <p>{article.title} </p>
       <p>{article.body} </p>
-      <ArticleCommentsList />
+
+      <Users article={article} key={article.article_id }
+      comments={comments} setComments={setComments}/>
+      <ArticleCommentsList comments={comments} setComments={setComments}/>
 
       <p> View other articles - links of other articles to be placed here</p>
     </>

@@ -4,6 +4,7 @@ import { fetchArticles } from "../api.js";
 import { Link } from "react-router-dom";
 import "../css/ArticlesList.css";
 import { ArticlesCard } from "./ArticlesCard.jsx";
+import { Users } from "./Users.jsx";
 
 export const ArticlesList = () => {
   const [articles, setArticles] = useState([]);
@@ -25,16 +26,18 @@ export const ArticlesList = () => {
   }, []);
 
   if (isLoading) {
-    return <h2 className="loading"> Loading books ...</h2>;
+    return <h2 className="loading"> Loading articles ...</h2>;
   }
 
   return (
     articles && (
-      <ul>
-        {articles.map((article) => (
-          <ArticlesCard article={article} key={article.article_id} />
-        ))}
-      </ul>
+      <div>
+        <ul>
+          {articles.map((article) => (
+            <ArticlesCard article={article} key={article.article_id} />
+          ))}
+        </ul>
+      </div>
     )
   );
 };

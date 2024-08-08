@@ -4,9 +4,9 @@ import { fetchCommentsByArticleId } from "../api";
 import { useEffect } from "react";
 import { CommentCard } from "./CommentCard";
 
-export const ArticleCommentsList = () => {
+export const ArticleCommentsList = ({comments, setComments}) => {
   const { article_id } = useParams();
-  const [comments, setComments] = useState("");
+ 
 
   useEffect(() => {
     fetchCommentsByArticleId(article_id).then((data) => {

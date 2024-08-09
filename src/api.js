@@ -76,9 +76,22 @@ export const postComment = (article_id, username, body) => {
     .catch((err) => {
       console.log(err);
     });
-  // post comment
-
-  //if successfull do A
-
-  //if unsuccessful do B
 };
+
+export const deleteComment = (comment_id) => {
+
+  const commentObj = {
+    comment_id: comment_id
+  }
+  console.log(comment_id, "inside api")
+
+  return apiClient.delete(`/comments/${comment_id}`, comment_id).then((response) => {
+    console.log(comment_id, "inside axios")
+
+    
+  }).catch((err) => {
+    console.log(err)
+  })
+  
+
+}

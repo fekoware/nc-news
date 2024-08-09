@@ -13,11 +13,14 @@ export const SingleArticle = () => {
   const [count, setCount] = useState(0);
   const [error, setError] = useState(null);
   const [comments, setComments] = useState("");
+  const [username, setUsername] = useState("");
+  
 
   useEffect(() => {
     fetchArticleById(article_id).then((data) => {
       setArticle(data);
     });
+
   }, [article_id]);
 
   const incrementCount = (increment) => {
@@ -35,6 +38,10 @@ export const SingleArticle = () => {
     });
   };
 
+ 
+
+
+
   return (
     <>
       <Link to="/">Go Back</Link>
@@ -43,10 +50,13 @@ export const SingleArticle = () => {
       <p>{article.author}</p>
       <p>{article.topic}</p>
       <p>{article.votes + count} likes </p>
+      
       <div>
         <button onClick={() => incrementCount(1)}>Like Article</button>
         <button onClick={() => incrementCount(-1)}>Remove Like</button>
         {error ? <p>{error}</p> : null}
+
+       
       </div>
 
       <p>{article.category} </p>
@@ -55,9 +65,9 @@ export const SingleArticle = () => {
       <p>{article.title} </p>
       <p>{article.body} </p>
 
-      <Users article={article} key={article.article_id }
+      <Users username={username} setUsername={setUsername} article={article} key={article.article_id }
       comments={comments} setComments={setComments}/>
-      <ArticleCommentsList comments={comments} setComments={setComments}/>
+      <ArticleCommentsList  username={username} setUsername={setUsername}  comments={comments} setComments={setComments}/>
 
       <p> View other articles - links of other articles to be placed here</p>
     </>

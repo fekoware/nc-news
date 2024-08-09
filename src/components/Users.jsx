@@ -4,9 +4,9 @@ import { postComment } from "../api";
 import { useState } from "react";
 import { useEffect } from "react";
 
-export const Users = ({ article, comments, setComments }) => {
+export const Users = ({ username, setUsername,article, comments, setComments }) => {
   const [users, setUsers] = useState([]);
-  const [username, setUsername] = useState("");
+
   const [commentPost, setCommentPost] = useState("");
   const [commentInput, setCommentInput] = useState("");
 

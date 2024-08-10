@@ -79,19 +79,47 @@ export const postComment = (article_id, username, body) => {
 };
 
 export const deleteComment = (comment_id) => {
-
   const commentObj = {
-    comment_id: comment_id
-  }
-  console.log(comment_id, "inside api")
+    comment_id: comment_id,
+  };
+  console.log(comment_id, "inside api");
 
-  return apiClient.delete(`/comments/${comment_id}`, comment_id).then((response) => {
-    console.log(comment_id, "inside axios")
+  return apiClient
+    .delete(`/comments/${comment_id}`, comment_id)
+    .then((response) => {
+      console.log(comment_id, "inside axios");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
-    
-  }).catch((err) => {
-    console.log(err)
-  })
-  
+export const fetchTopics = () => {
+  return apiClient.get(`/topics`).then((response) => {
+    return response.data.topics;
+  });
+};
+/*
 
-}
+viewing articles by topic
+sit as a child of articles list. 
+
+button of different topics on home screen
+
+when a button if pressed, articles are filtered by the button
+seperate page for this
+
+
+route topic element article list
+
+function get articles by topic
+  topic will be passed in as an argument
+  fetch all articles
+  create an empty array
+  if srticle topic matches arguement passsed in, push object into array
+  return this new array
+
+
+  where will this sit? on articles page
+
+*/

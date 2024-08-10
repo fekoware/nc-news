@@ -7,10 +7,7 @@ export const CommentCard = ({ username, comment }) => {
   const [isDeleted, setIsDeleted] = useState(false);
 
 
-  /*
-
-        if username and comment authour match, display button
-        */
+ 
 
   const handleDelete = (event, commentID) => {
 

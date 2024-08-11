@@ -5,10 +5,12 @@ const apiClient = axios.create({
   baseURL: "https://nc-news-3wpg.onrender.com/api",
 });
 
-export const fetchArticles = () => {
+export const fetchArticles = (params = {}) => {
+
   return apiClient
-    .get("/articles")
+    .get("/articles", { params })
     .then((response) => {
+      console.log({params})
       return response.data.articles;
     })
     .catch((err) => {
@@ -99,27 +101,4 @@ export const fetchTopics = () => {
     return response.data.topics;
   });
 };
-/*
 
-viewing articles by topic
-sit as a child of articles list. 
-
-button of different topics on home screen
-
-when a button if pressed, articles are filtered by the button
-seperate page for this
-
-
-route topic element article list
-
-function get articles by topic
-  topic will be passed in as an argument
-  fetch all articles
-  create an empty array
-  if srticle topic matches arguement passsed in, push object into array
-  return this new array
-
-
-  where will this sit? on articles page
-
-*/

@@ -13,8 +13,8 @@ function App() {
       <Header />
       <Routes>
         <Route path='/users' element={<Users />}/>
-        <Route path='/articles' element={<ArticlesList/>}/>
         <Route path='/' element={<ArticlesList/>}/>
+        <Route path='/articles' element={<ArticlesList/>}/>
         <Route path="/articles/:topicSlug" element={<TopicArticles />} />
         <Route path='/articles/:topicSlug/:article_id' element={<SingleArticle/>} />
       </Routes>

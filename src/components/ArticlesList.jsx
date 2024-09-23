@@ -16,7 +16,7 @@ export const ArticlesList = () => {
     fetchArticles()
       .then((data) => {
         setArticles(data);
-
+        console.log("hello")
         setIsLoading(false);
       })
       .catch((err) => {

@@ -26,15 +26,6 @@ export const ArticlesList = () => {
       });
   }, []);
 
-
-
-
-
-
-
-
-
-
   if (isLoading) {
     return <h2 className="loading"> Loading articles ...</h2>;
   }

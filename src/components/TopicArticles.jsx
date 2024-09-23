@@ -61,6 +61,7 @@ export const TopicArticles = () => {
             <option value="created_at">Date</option>
 
             <option value="votes">Votes</option>
+            <option></option>
           </select>
 
           <label>Order: </label>

@@ -10,7 +10,7 @@ export const ArticlesCard = ({article}) => {
     
     <li className='article-card'key={article.article_id}>
         
-    <Link to={`/articles/${topicSlug}/${article.article_id}`}>
+    <Link to={`/articles/${article.topic}/${article.article_id}`}>
    <img src={article.article_img_url} />
    <p>{article.author}</p>
    <p>{article.title} </p>

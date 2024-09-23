@@ -22,6 +22,7 @@ export const ArticlesList = () => {
     fetchArticles({ sort_by: sortBy, order: order  })
       .then((data) => {
         setArticles(data);
+        console.log("hello")
         setIsLoading(false);
       })
       .catch((err) => {

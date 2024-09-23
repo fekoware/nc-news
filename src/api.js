@@ -10,11 +10,7 @@ export const fetchArticles = (params = {}) => {
   return apiClient
     .get("/articles", { params })
     .then((response) => {
-<<<<<<< HEAD
       console.log(response.data.articles)
-=======
-      console.log({params})
->>>>>>> 998c328e3ac1b46ec697f477a2b9f4328c340c51
       return response.data.articles;
       
     })

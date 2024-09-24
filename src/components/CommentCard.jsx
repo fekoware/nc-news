@@ -3,7 +3,6 @@ import { deleteComment } from "../api";
 import { useState } from "react";
 
 export const CommentCard = ({ username, comment }) => {
-  let commentID;
   const [isDeleted, setIsDeleted] = useState(false);
 
 

@@ -26,7 +26,6 @@ export const ArticlesList = () => {
       })
       .catch((err) => {
         console.log(err);
-        setIsLoading(false);
         setIsError(true);
       });
   }, [topicSlug, searchParams]);
@@ -59,6 +58,11 @@ export const ArticlesList = () => {
   return (
     articles && (
       <div>
+        
+      <div class='flex w-screen bg-red-500'> 
+        <TopicsList />
+        </div>
+
         <form>
           <label>Sort By: </label>
           <select
@@ -67,7 +71,6 @@ export const ArticlesList = () => {
           >
             <option>Select One</option>
             <option value="created_at">Date</option>
-            <option value="comment_count">Comments</option>
             <option value="votes">Votes</option>
           </select>
 
@@ -82,13 +85,21 @@ export const ArticlesList = () => {
           </select>
         </form>
 
-        <TopicsList />
+
+
+
+
+
         <ul>
           {articles.map((article) => {
             return <ArticlesCard article={article} key={article.article_id} />;
           })}
         </ul>
+
+
+
       </div>
+      
     )
   );
 };

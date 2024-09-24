@@ -12,10 +12,9 @@ export const ArticleCommentsList = ({ username, setUsername, comments, setCommen
  
 
   useEffect(() => {
-    setIsLoading(true)
     fetchCommentsByArticleId(article_id).then((data) => {
       setComments(data);
-    isLoading(false)
+      setIsLoading(false)
     }).catch((err) => {
       setIsLoading(false);
       console.log(err)

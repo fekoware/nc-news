@@ -24,11 +24,10 @@ export const SingleArticle = () => {
   const incrementCount = (increment) => {
     setCount((currCount) => {
       setError(null);
-
       return currCount + increment;
     });
     updateVotesByArticleId(article.article_id, increment).catch((err) => {
-      //if unable to increment
+      //if unable to increment conditional rendering
       setCount((currCount) => {
         setError("Like unsuccesful, try again");
         return currCount - increment;

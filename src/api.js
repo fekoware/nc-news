@@ -10,6 +10,8 @@ export const fetchArticles = (params = {}) => {
   return apiClient
     .get("/articles", { params })
     .then((response) => {
+    
+      console.log(params, "fetch artiles")
       console.log(response.data.articles)
       return response.data.articles;
       

@@ -14,14 +14,16 @@ export const TopicsList = () => {
   }, []);
 
   return (
+    <div>
     <ul>
-      <li>
-        <Link to='/articles'> <button>all</button></Link>
+      <li  class='flex p-5 text-white'>
+        {/* <Link to='/articles'> <button>all</button></Link> */}
 
         {topics.map((topic) => {
           return <TopicButton topic={topic} key={topic.slug} />;
         })}
       </li>
     </ul>
+    </div>
   );
 };

@@ -10,7 +10,7 @@ export const TopicArticles = () => {
   const [articles, setArticles] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setIsError] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const sortBy = searchParams.get("sort_by") || "created_at";
@@ -22,7 +22,7 @@ export const TopicArticles = () => {
         setIsLoading(false);
       })
       .catch((err) => {
-        setIsLoading(false);
+
         console.log(err)
         setIsError(true)
       });
@@ -63,7 +63,6 @@ export const TopicArticles = () => {
         >
           <option>Select One</option>
           <option value="created_at">Date</option>
-          <option value="comment_count">Comments</option>
           <option value="votes">Votes</option>
         </select>
 

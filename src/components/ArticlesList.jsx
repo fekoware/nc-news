@@ -12,22 +12,22 @@ export const ArticlesList = () => {
   const { topicSlug } = useParams();
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    setIsLoading(true);
     const sortBy = searchParams.get("sort_by") || "created_at";
     const order = searchParams.get("order") || "desc";
 
-    fetchArticles({ sort_by: sortBy, order: order  })
-      .then((data) => {
-        setArticles(data);
-        console.log("hello")
+    fetchArticles({ sort_by: sortBy, order: order })
+      .then((articles) => {
+        setArticles(articles);
         setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
         setIsLoading(false);
+        setIsError(true);
       });
   }, [topicSlug, searchParams]);
 
@@ -35,8 +35,13 @@ export const ArticlesList = () => {
     return <h2 className="loading"> Loading articles ...</h2>;
   }
 
+  if (isError) {
+    return <h2> Error loading articles, refresh the page</h2>
+  }
+
   const handleSortByChange = (event) => {
     const sortBy = event.target.value;
+    console.log(sortBy, "sort by handle");
     setSearchParams({
       sort_by: sortBy,
       order: searchParams.get("order") || "desc",
@@ -62,7 +67,7 @@ export const ArticlesList = () => {
           >
             <option>Select One</option>
             <option value="created_at">Date</option>
-
+            <option value="comment_count">Comments</option>
             <option value="votes">Votes</option>
           </select>
 

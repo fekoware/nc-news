@@ -6,7 +6,6 @@ import { useEffect } from "react";
 
 export const Users = ({ username, setUsername,article, comments, setComments }) => {
   const [users, setUsers] = useState([]);
-
   const [commentPost, setCommentPost] = useState("");
   const [commentInput, setCommentInput] = useState("");
 

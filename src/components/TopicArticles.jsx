@@ -10,35 +10,39 @@ export const TopicArticles = () => {
   const [articles, setArticles] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setIsError] = useState(false);
 
   useEffect(() => {
-    const sortBy = searchParams.get("sort_by") || "created_at"; 
-    const order = searchParams.get("order") || "desc"; 
+    const sortBy = searchParams.get("sort_by") || "created_at";
+    const order = searchParams.get("order") || "desc";
 
-    fetchArticles({ sort_by: sortBy, order: order}).then((allArticles) => {
-      const filteredArticles = allArticles.filter(
-        (article) => article.topic === topicSlug
-      );
-      setArticles(filteredArticles);
-      setIsLoading(false);
-    }).catch((err) => {
-        console.log(err)
+    fetchArticles({ sort_by: sortBy, order: order })
+      .then((articles) => {
+        setArticles(articles);
         setIsLoading(false);
-    });
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err)
+        setIsError(true)
+      });
   }, [topicSlug, searchParams]);
 
   if (isLoading) {
     return <h2 className="loading"> Loading articles ...</h2>;
   }
 
+  if (isError) {
+    return <h2 className="loading"> Error loading articles, refresh this page</h2>;
+  }
 
   const handleSortByChange = (event) => {
     const sortBy = event.target.value;
+    console.log(sortBy);
     setSearchParams({
       sort_by: sortBy,
       order: searchParams.get("order") || "desc",
     });
-    
   };
 
   const handleSortOrderChange = (event) => {
@@ -51,29 +55,28 @@ export const TopicArticles = () => {
 
   return (
     <div>
-        <form>
-          <label>Sort By: </label>
-          <select
-            value={searchParams.get("sort_by") || "created_at"}
-            onChange={handleSortByChange}
-          >
-            <option>Select One</option>
-            <option value="created_at">Date</option>
+      <form>
+        <label>Sort By: </label>
+        <select
+          value={searchParams.get("sort_by") || "created_at"}
+          onChange={handleSortByChange}
+        >
+          <option>Select One</option>
+          <option value="created_at">Date</option>
+          <option value="comment_count">Comments</option>
+          <option value="votes">Votes</option>
+        </select>
 
-            <option value="votes">Votes</option>
-            <option></option>
-          </select>
-
-          <label>Order: </label>
-          <select
-            value={searchParams.get("order") || "desc"}
-            onChange={handleSortOrderChange}
-          >
-            <option>Select One</option>
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-          </select>
-        </form>
+        <label>Order: </label>
+        <select
+          value={searchParams.get("order") || "desc"}
+          onChange={handleSortOrderChange}
+        >
+          <option>Select One</option>
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+      </form>
       <TopicsList />
 
       <h1>Articles for {topicSlug}</h1>

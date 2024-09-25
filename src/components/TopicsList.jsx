@@ -1,3 +1,4 @@
+// TopicsList.js
 import { useState } from "react";
 import { useEffect } from "react";
 import { fetchTopics } from "../api";
@@ -14,16 +15,16 @@ export const TopicsList = () => {
   }, []);
 
   return (
-    <div>
-    <ul>
-      <li  class='flex p-5 text-white'>
-        {/* <Link to='/articles'> <button>all</button></Link> */}
-
+    <div className="flex flex-wrap ">
+      <ul className="flex flex-wrap">
         {topics.map((topic) => {
-          return <TopicButton topic={topic} key={topic.slug} />;
+          return (
+            <li key={topic.slug} >
+              <TopicButton topic={topic} />
+            </li>
+          );
         })}
-      </li>
-    </ul>
+      </ul>
     </div>
   );
 };

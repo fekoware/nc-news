@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { fetchArticles } from "../api.js";
 import { Link, useSearchParams } from "react-router-dom";
-import "../css/ArticlesList.css";
+
 import { ArticlesCard } from "./ArticlesCard.jsx";
 import { Users } from "./Users.jsx";
 import { TopicsList } from "./TopicsList.jsx";
@@ -35,7 +35,7 @@ export const ArticlesList = () => {
   }
 
   if (isError) {
-    return <h2> Error loading articles, refresh the page</h2>
+    return <h2> Error loading articles, refresh the page</h2>;
   }
 
   const handleSortByChange = (event) => {
@@ -57,49 +57,54 @@ export const ArticlesList = () => {
 
   return (
     articles && (
-      <div>
-        
-      <div class='flex w-screen bg-red-500'> 
-        <TopicsList />
+      <div class='w-full'>
+        <div class=" flex flex-wrap items-center justify-center w-full p-5 bg-red-500">
+          <TopicsList />
         </div>
 
-        <form>
-          <label>Sort By: </label>
-          <select
-            value={searchParams.get("sort_by") || "created_at"}
-            onChange={handleSortByChange}
-          >
-            <option>Select One</option>
-            <option value="created_at">Date</option>
-            <option value="votes">Votes</option>
-          </select>
+        <form class="flex flex-wrap items-center justify-center w-full p-5">
 
-          <label>Order: </label>
-          <select
-            value={searchParams.get("order") || "desc"}
-            onChange={handleSortOrderChange}
-          >
-            <option>Select One</option>
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-          </select>
+          <div class="  px-4 " >
+            <label>Sort By: </label>
+            <select
+             class="  hover:underline "
+              value={searchParams.get("sort_by") || "created_at"}
+              onChange={handleSortByChange}
+            >
+              <option>Select One</option>
+              <option value="created_at">Date</option>
+              <option value="votes">Votes</option>
+            </select>
+          </div>
+
+          <div class="  px-4 ">
+            <label>Order: </label>
+            <select
+          class="  hover:underline "
+              value={searchParams.get("order") || "desc"}
+              onChange={handleSortOrderChange}
+            >
+              <option>Select One</option>
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+          </div>
         </form>
 
-
-
-
-
-
-        <ul>
+        <div class="flex items-center justify-center"> 
+        <ul >
           {articles.map((article) => {
-            return <ArticlesCard article={article} key={article.article_id} />;
+            return (
+            
+              <div >
+            <ArticlesCard article={article} key={article.article_id} />
+            </div>
+            )
           })}
         </ul>
-
-
+        </div>
 
       </div>
-      
     )
   );
 };

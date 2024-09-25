@@ -11,7 +11,9 @@ import { ErrorPage } from "./components/ErrorPage";
 function App() {
   return (
     <>
+    <div class='flex text-center justify-center items-center'> 
       <Header />
+      </div>
       <Routes>
         <Route path='/users' element={<Users />}/>
         <Route path='/' element={<ArticlesList/>}/>

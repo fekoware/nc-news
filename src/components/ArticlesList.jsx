@@ -21,8 +21,8 @@ export const ArticlesList = () => {
 
     fetchArticles({ sort_by: sortBy, order: order })
       .then((articles) => {
-        setArticles(articles);
         setIsLoading(false);
+        setArticles(articles);
       })
       .catch((err) => {
         console.log(err);
@@ -31,11 +31,22 @@ export const ArticlesList = () => {
   }, [topicSlug, searchParams]);
 
   if (isLoading) {
-    return <h2 className="loading"> Loading articles ...</h2>;
+    return (
+      <div className="flex flex-col justify-center items-center h-screen space-y-4">
+        <h1 className="text-xl font-bold">Loading Articles...</h1>
+        <div className="w-16 h-16 border-8 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
   }
 
   if (isError) {
-    return <h2> Error loading articles, refresh the page</h2>;
+    return (
+      <div class="flex flex-col justify-center items-center h-screen space-y-4">
+        <h1 class="text-xl font-bold">
+          Error loading articles, refresh this page
+        </h1>
+      </div>
+    );
   }
 
   const handleSortByChange = (event) => {
@@ -57,30 +68,29 @@ export const ArticlesList = () => {
 
   return (
     articles && (
-      <div class='w-full'>
-        <div class=" flex flex-wrap items-center justify-center w-full p-5 bg-red-500">
+      <div className="w-full">
+        <div className="flex flex-wrap items-center justify-center w-full p-5 bg-red-500">
           <TopicsList />
         </div>
 
-        <form class="flex flex-wrap items-center justify-center w-full p-5">
-
-          <div class="  px-4 " >
+        <form className="flex flex-wrap items-center justify-center w-full p-5">
+          <div className="px-4">
             <label>Sort By: </label>
             <select
-             class="  hover:underline "
+              className="hover:underline"
               value={searchParams.get("sort_by") || "created_at"}
               onChange={handleSortByChange}
             >
               <option>Select One</option>
               <option value="created_at">Date</option>
-              <option value="votes">Votes</option>
+              <option value="votes">Likes</option>
             </select>
           </div>
 
-          <div class="  px-4 ">
+          <div className="px-4">
             <label>Order: </label>
             <select
-          class="  hover:underline "
+              className="hover:underline"
               value={searchParams.get("order") || "desc"}
               onChange={handleSortOrderChange}
             >
@@ -91,19 +101,17 @@ export const ArticlesList = () => {
           </div>
         </form>
 
-        <div class="flex items-center justify-center"> 
-        <ul >
-          {articles.map((article) => {
-            return (
-            
-              <div >
-            <ArticlesCard article={article} key={article.article_id} />
-            </div>
-            )
-          })}
-        </ul>
+        <div className="flex items-center justify-center">
+          <ul className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 h-1/6 gap-4">
+            {articles.map((article) => (
+              <li key={article.article_id} className="flex justify-stretch">
+                <div className="flex flex-col">
+                  <ArticlesCard article={article} />
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
-
       </div>
     )
   );

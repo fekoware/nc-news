@@ -36,8 +36,15 @@ export const SingleArticle = () => {
   };
 
   return (
-    <>
+    <div class='flex w-full justify-center'> 
+
+    <div class=' flex flex-wrap w-1/2 items-center justify-center '> 
       <Link to={`/articles/${topicSlug}`}>Go Back</Link>
+
+
+      <p class='flex w-full  justify-center py-2 text-3xl font-bold'>{article.title} </p>
+
+
 
       <img src={article.article_img_url} />
       <p>{article.author}</p>
@@ -53,7 +60,7 @@ export const SingleArticle = () => {
       <p>{article.category} </p>
       <p>{article.created_at} </p>
       <p>{article.comment_count} comments </p>
-      <p>{article.title} </p>
+      
       <p>{article.body} </p>
 
       <Users
@@ -72,7 +79,9 @@ export const SingleArticle = () => {
       />
 
       <p> View other articles - links of other articles to be placed here</p>
-    </>
+      </div>
+
+      </div>
   );
 };
 

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export const TopicButton = ({ topic }) => {
   const topicSlug = topic.slug;
-
+  console.log(topicSlug)
   return (
 
     <Link to={`/articles/${topicSlug}`}>

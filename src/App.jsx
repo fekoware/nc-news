@@ -11,7 +11,7 @@ import { ErrorPage } from "./components/ErrorPage";
 function App() {
   return (
     <>
-    <div class='flex text-center justify-center items-center'> 
+    <div className='flex text-center justify-center items-center'> 
       <Header />
       </div>
       <Routes>

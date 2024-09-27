@@ -9,6 +9,7 @@ export const fetchArticles = (params = {}) => {
 
   return apiClient
     .get("/articles", { params })
+    
     .then((response) => {
     
       console.log(params, "fetch artiles")
@@ -59,6 +60,7 @@ export const fetchUsers = () => {
   return apiClient
     .get("/users")
     .then((response) => {
+
       return response.data.users;
     })
     .catch((err) => {
@@ -67,11 +69,15 @@ export const fetchUsers = () => {
     });
 };
 
-export const postComment = (article_id, username, body) => {
+export const postComment = (username, body, article_id) => {
   const commentObj = {
+    article_id: article_id,
     username: username,
     body: body,
+
   };
+
+  console.log(commentObj, "hello")
 
   return apiClient
     .post(`/articles/${article_id}/comments`, commentObj)

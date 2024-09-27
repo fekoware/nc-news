@@ -1,41 +1,34 @@
-import "../css/CommentCard.css";
+
 import { deleteComment } from "../api";
 import { useState } from "react";
 
 export const CommentCard = ({ username, comment }) => {
   const [isDeleted, setIsDeleted] = useState(false);
 
-
- 
-
   const handleDelete = (event, commentID) => {
-
     event.preventDefault();
     commentID = comment.comment_id;
     deleteComment(commentID)
       .then((data) => {
-        
         setIsDeleted(true);
         setTimeout(() => setIsDeleted(false), 3000);
-        
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-
-
   return (
-    <div className="comment-card">
+    <div className="comment-card py-2">
       {!isDeleted ? (
         <>
-          <p>{comment.author}</p>
+          <p className="font-bold">{comment.author}</p>
           <p>{comment.body}</p>
-          <p>{comment.votes}</p>
+          <p>{comment.created_at}</p>
+          <p class='flex w-full justify-end'>{comment.votes} likes</p>
           {username === comment.author && (
             <form>
-              <button type="submit" onClick={handleDelete}>
+              <button class="bg-red-500 w-full text-white px-4 py-2  transition-opacity duration-200 ease-in-out hover:opacity-80 active:opacity-100" type="submit" onClick={handleDelete}>
                 Delete Comment
               </button>
             </form>
@@ -43,8 +36,7 @@ export const CommentCard = ({ username, comment }) => {
         </>
       ) : (
         <>
-        
-        <p>Comment has been deleted.</p>
+          <p>Comment has been deleted.</p>
         </>
       )}
     </div>

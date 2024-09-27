@@ -23,11 +23,22 @@ export const ArticleCommentsList = ({ username, setUsername, comments, setCommen
   }, [article_id, comments]);
 
   if (isLoading) {
-    return <h2>Loading comments...</h2>
+    return (
+      <div className="flex flex-col justify-center items-center space-y-4">
+        <h1 className="text-xl font-bold">Loading Comments...</h1>
+        <div className="w-16 h-16 border-8 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
   }
 
-  if(isError) {
-    return <h2>Error loading comments, refresh page</h2>
+  if (isError) {
+    return (
+      <div class="flex flex-col justify-center items-center h-screen space-y-4">
+        <h1 class="text-xl font-bold">
+          Error loading comments, refresh this page
+        </h1>
+      </div>
+    );
   }
 
   return (

@@ -30,14 +30,14 @@ export const ArticlesCard = ({ article }) => {
             <p class=" flex w-full justify-end">
               {formatDistanceToNow(new Date(article.created_at), {
                 addSuffix: true,
-              })}{" "}
+              })}
             </p>
           </div>
         </div>
 
         <Link to={`/articles/${article.topic}/${article.article_id}`}>
           <button class="bg-red-500 w-full text-white px-4 py-2  transition-opacity duration-200 ease-in-out hover:opacity-80 active:opacity-100">
-            {" "}
+
             View
           </button>
         </Link>

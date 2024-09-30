@@ -82,7 +82,7 @@ export const TopicArticles = () => {
           <TopicsList />
         </div>
   
-        <form className="flex flex-wrap items-center justify-center w-full p-5">
+        <form className="flex  items-center justify-center w-full p-5">
           <div className="px-4">
             <label>Sort By: </label>
             <select

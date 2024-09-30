@@ -6,6 +6,7 @@ import { ArticleCommentsList } from "./ArticleCommentsList";
 import { Users } from "./Users";
 import { TopicsList } from "./TopicsList";
 import { formatDistanceToNow } from "date-fns";
+import { CommentForm } from "./CommentForm";
 
 
 export const SingleArticle = () => {
@@ -60,7 +61,6 @@ export const SingleArticle = () => {
         </Link>
 
         <p className="text-3xl font-bold">{article.title}</p>
-        <p class="font-bold text-2xl pb-1">{article.author}</p>
 
         <img
           className="max-w-3xl w-full h-auto"
@@ -70,15 +70,13 @@ export const SingleArticle = () => {
         {/*  */}
 
         
+        <p class="font-bold text-2xl pb-1">{article.author}</p>
 
         <p className="text-left py-2 text-lg">{article.body}</p>
 
         <div className="flex w-full py-1">
           {/*  */}
-          <div class="flex flex-wrap w-full  justify-start">
-            <p class="flex w-full">{article.comment_count} comments</p>
-            <p class="flex w-full ">{article.votes + count} likes</p>
-          </div>
+       
           {/*  */}
           <div className="flex flex-wrap justify-end w-full">
             <p class="flex w-full justify-end">{article.topic}</p>
@@ -103,9 +101,12 @@ export const SingleArticle = () => {
           {error && <p>{error}</p>}
         </div>
 
+        <div class="flex flex-wrap w-full  justify-start">
+            <p class="flex w-full">{article.comment_count} comments</p>
+            <p class="flex w-full ">{article.votes + count} likes</p>
+          </div>
 
-
-        <Users 
+        <CommentForm
           username={username}
           setUsername={setUsername}
           article={article}

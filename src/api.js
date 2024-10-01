@@ -123,3 +123,20 @@ export const postTopic = (slug, description) => {
   })
 }
 
+
+export const postArticle = (author, title, body, topic, article_img_url = null) => {
+  const articleObj = {
+    author: author,
+    title: title,
+    body: body,
+    topic: topic,
+    article_img_url: article_img_url
+  }
+
+  return apiClient.post('/articles', articleObj).then((response) => {
+    console.log(reponse.data)
+    return response.data
+  }).catch((err) => {
+    console.log(err)
+  })
+}

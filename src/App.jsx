@@ -7,6 +7,8 @@ import { ArticlesCard } from "./components/ArticlesCard";
 import { Users } from "./components/Users";
 import { TopicArticles } from "./components/TopicArticles";
 import { ErrorPage } from "./components/ErrorPage";
+import { TopicListPage } from "./components/TopicListPage";
+import { AddArticlePage } from "./components/AddArticlePage";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="/articles/:topicSlug" element={<TopicArticles />} />
         <Route path='/articles/:topicSlug/:article_id' element={<SingleArticle/>} />
         <Route path='*' element={<ErrorPage/>}></Route>
+        <Route path='/topics' element={<TopicListPage/>} />
+        <Route path='/add-article' element={< AddArticlePage/>} />
       </Routes>
     </>
   );

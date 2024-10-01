@@ -53,6 +53,7 @@ export const SingleArticle = () => {
     <div className="grid grid-cols-1 w-full justify-center">
       <div className="flex items-center justify-center w-full p-5 bg-red-500">
         <TopicsList />
+     
       </div>
 
       <div className="grid grid-cols-1 lg:w-1/2 mx-auto">

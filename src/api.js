@@ -77,8 +77,6 @@ export const postComment = (username, body, article_id) => {
 
   };
 
-  console.log(commentObj, "hello")
-
   return apiClient
     .post(`/articles/${article_id}/comments`, commentObj)
     .then((response) => {
@@ -110,4 +108,18 @@ export const fetchTopics = () => {
     return response.data.topics;
   });
 };
+
+export const postTopic = (slug, description) => {
+  const topicObj = {
+    slug: slug,
+    description: description
+  }
+
+  return apiClient.post('/topics', topicObj).then((response) => {
+    console.log(response.data)
+    return response.data
+  }).catch((err) => {
+    console.log(err)
+  })
+}
 

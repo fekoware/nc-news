@@ -12,7 +12,7 @@ export const TopicsList = () => {
     fetchTopics().then((data) => {
       setTopics(data);
     });
-  }, []);
+  }, [topics]);
 
   return (
     <div className="flex flex-wrap ">

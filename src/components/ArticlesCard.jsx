@@ -7,11 +7,11 @@ export const ArticlesCard = ({ article }) => {
   const { topicSlug } = useParams();
 
   return (
-    <div class=" flex flex-wrap items-center  my-4">
+    <div class=" flex flex-wrap w-full items-center my-4">
       <li key={article.article_id}>
         <img
           class={
-            "transition duration-300 ease-in-out filter brightness-100 hover:brightness-110 border-b-4 border-transparent hover:border-red-500 ${isClicked ? 'border-red-500' : 'border-transparent'} "
+            "transition duration-300 ease-in-out w-full filter brightness-100 hover:brightness-110 border-b-4 border-transparent hover:border-red-500 ${isClicked ? 'border-red-500' : 'border-transparent'} "
           }
           src={article.article_img_url}
         />

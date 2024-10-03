@@ -1,14 +1,17 @@
 import { TopicsList } from "./TopicsList";
 import { useState } from "react";
+import { postArticle } from "../api";
 
-export const ArticleForm = () => {
-  const [titleInput, seTitleInput] = useState("");
+export const ArticleForm = ({ username }) => {
+  const [titleInput, setTitleInput] = useState("");
   const [bodyInput, setBodyInput] = useState("");
   const [imageURL, setImageURL] = useState("");
-  const [topics, setTopics] =useState("");
+
+
+  const [topicInput, setTopicInput] = useState("");
 
   const handleTitleChange = (event) => {
-    seTitleInput(event.target.value);
+    setTitleInput(event.target.value);
   };
 
   const handleBodyChange = (event) => {
@@ -16,19 +19,30 @@ export const ArticleForm = () => {
   };
 
   const handleURLChange = (event) => {
-    setBodyInput(event.target.value);
+    setImageURL(event.target.value);
+  };
+
+  const handleTopicChange = (event) => {
+    setTopicInput(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    postArticle(slugInput, descriptionInput)
+    postArticle(username, titleInput, bodyInput, topicInput, imageURL)
       .then((data) => {
-        console.log(data);
+
+        console.log(username, titleInput, bodyInput, topicInput, imageURL)
+        console.log("Article posted:", data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log("Error posting article:", err);
       });
+
+      setTitleInput("");
+      setBodyInput("");
+      setTopicInput("");
+      setImageURL("");
   };
 
   return (
@@ -37,46 +51,46 @@ export const ArticleForm = () => {
         <TopicsList />
       </div>
 
-      <div class="flex flex-wrap w-full justify-center">
+      <div className="flex flex-wrap w-full justify-center">
         <form
           onSubmit={handleSubmit}
-          class="grid grid-cols-1 lg:w-1/2 w-full place-items-center gap-4"
+          className="grid grid-cols-1 lg:w-1/2 w-full place-items-center gap-4"
         >
-          <label class="flex justify-left w-full text-center">Title:</label>
+          <label className="flex justify-left w-full text-center">Title:</label>
           <input
-            class="w-full border-green-800 border-2 mx-auto"
+            className="w-full border-green-800 border-2 mx-auto"
             onChange={handleTitleChange}
             value={titleInput}
           />
 
-          <label class="flex justify-left w-full text-center">
+          <label className="flex justify-left w-full text-center">
             Article Body:
           </label>
           <input
-            class="w-full border-green-800 border-2 mx-auto"
+            className="w-full border-green-800 border-2 mx-auto"
             onChange={handleBodyChange}
             value={bodyInput}
           />
 
-          <label class="flex justify-left w-full text-center">
+          <label className="flex justify-left w-full text-center">
             Image URL (optional):
           </label>
           <input
-            class="w-full border-green-800 border-2 mx-auto"
+            className="w-full border-green-800 border-2 mx-auto"
             onChange={handleURLChange}
             value={imageURL}
           />
 
-          <label> Topic </label>
-
-          <select>
-            <option> Select Topic</option>
-
+          <label>Topic:</label>
+          <select onChange={handleTopicChange} value={topicInput}>
+            <option value="">Select Topic</option>
+            <option value="cooking">cooking</option>
+            <option value="topic2">Topic 2</option>
           </select>
 
           <button
             type="submit"
-            class="bg-green-700 w-full text-white px-4 py-2  transition-opacity duration-200 ease-in-out hover:opacity-80 active:opacity-100 my-2"
+            className="bg-green-700 w-full text-white px-4 py-2 transition-opacity duration-200 ease-in-out hover:opacity-80 active:opacity-100 my-2"
           >
             Post Article
           </button>

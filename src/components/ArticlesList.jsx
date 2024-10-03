@@ -8,13 +8,14 @@ import { Users } from "./Users.jsx";
 import { TopicsList } from "./TopicsList.jsx";
 import { useParams } from "react-router-dom";
 
-export const ArticlesList = () => {
+export const ArticlesList = ({username}) => {
   const { topicSlug } = useParams();
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
+  console.log(username)
   useEffect(() => {
     const sortBy = searchParams.get("sort_by") || "created_at";
     const order = searchParams.get("order") || "desc";
@@ -28,7 +29,7 @@ export const ArticlesList = () => {
         console.log(err);
         setIsError(true);
       });
-  }, [topicSlug, searchParams]);
+  }, [topicSlug, searchParams, articles]);
 
   if (isLoading) {
     return (
@@ -106,7 +107,7 @@ export const ArticlesList = () => {
             {articles.map((article) => (
               <li key={article.article_id} className="flex justify-stretch">
                 <div className="flex flex-col">
-                  <ArticlesCard article={article} />
+                  <ArticlesCard username={username} article={article} key={article.article_id} />
                 </div>
               </li>
             ))}

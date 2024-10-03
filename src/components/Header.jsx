@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export const Header = () => {
-  const [username, setUsername] = useState("jessjelly");
+  const [username, setUsername] = useState([]);
 
   return (
     <div>
@@ -19,6 +19,12 @@ export const Header = () => {
       <Link to={"/add-article"}>
 <button> Add Article</button>
 </Link>
+
+<Link to={"/user-details"}>
+<button> View User</button>
+</Link>
+
+
 
     </div>
 

@@ -1,5 +1,6 @@
 import { postTopic } from "../api";
 import { useState } from "react";
+import { TopicsList } from "./TopicsList";
 
 export const TopicForm = () => {
   const [slugInput, setSlugInput] = useState("");
@@ -22,6 +23,10 @@ export const TopicForm = () => {
   };
 
   return (
+
+    <div> 
+
+
     <div class='flex flex-wrap w-full justify-center'> 
     <form onSubmit={handleSubmit} class="grid grid-cols-1 lg:w-1/2 w-full place-items-center gap-4">
 
@@ -42,6 +47,7 @@ export const TopicForm = () => {
   <button type="submit" class="bg-green-700 w-full text-white px-4 py-2  transition-opacity duration-200 ease-in-out hover:opacity-80 active:opacity-100 my-2">Post Topic</button>
 
 </form>
+</div>
 </div>
   );
 };

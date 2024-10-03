@@ -1,9 +1,9 @@
 import { ArticleForm } from "./ArticleForm"
 
-export const AddArticlePage = () => {
+export const AddArticlePage = ({username}) => {
 
 
     return (
-        <ArticleForm/>
+        <ArticleForm  username={username}/>
     )
 }

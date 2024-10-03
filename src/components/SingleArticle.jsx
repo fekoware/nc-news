@@ -64,7 +64,7 @@ export const SingleArticle = () => {
         <p className="text-3xl font-bold">{article.title}</p>
 
         <img
-          className="max-w-3xl w-full h-auto"
+          className="w-64 h-64 object-cover"
           src={article.article_img_url}
           alt={article.title}
         />

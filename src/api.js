@@ -123,3 +123,28 @@ export const postTopic = (slug, description) => {
   })
 }
 
+
+export const postArticle = (username, title, body, topic, article_img_url = null) => {
+
+  if (article_img_url === '' || !article_img_url.includes('https://')) {
+
+
+    article_img_url = `https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?w=700&h=700`
+  }
+  
+  const articleObj = {
+    author: username,
+    title: title,
+    body: body,
+    topic: topic,
+    article_img_url: article_img_url
+  }
+  console.log(articleObj)
+
+  return apiClient.post('/articles', articleObj).then((response) => {
+    console.log(response.data)
+    return response.data
+  }).catch((err) => {
+    console.log(err)
+  })
+}

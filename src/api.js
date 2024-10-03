@@ -148,3 +148,20 @@ export const postArticle = (username, title, body, topic, article_img_url = null
     console.log(err)
   })
 }
+
+
+export const deleteArticle = (article_id) => {
+  const articleObj = {
+    article_id: article_id,
+  };
+  console.log(article_id, "inside api");
+
+  return apiClient
+    .delete(`/articles/${article_id}`, article_id)
+    .then((response) => {
+      console.log(article_id, "inside axios");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}

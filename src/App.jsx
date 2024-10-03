@@ -19,10 +19,10 @@ function App() {
       </div>
       <Routes>
         <Route path="/users" element={<Users />} />
-        <Route path="/" element={<ArticlesList />} />
-        <Route path="/articles" element={<ArticlesList />} />
-        <Route path="/articles/:topicSlug" element={<TopicArticles />} />
-        <Route path="/articles/:topicSlug/:article_id" element={<SingleArticle />} />
+        <Route path="/" element={<ArticlesList username={username} />} />
+        <Route path="/articles" element={<ArticlesList username={username} />} />
+        <Route path="/articles/:topicSlug" element={<TopicArticles username={username} />} />
+        <Route path="/articles/:topicSlug/:article_id" element={<SingleArticle username={username}/>} />
         <Route path="*" element={<ErrorPage />} />
         <Route path="/topics" element={<TopicListPage />} />
         <Route path="/add-article" element={<AddArticlePage username={username} />} /> {/* Pass username to AddArticlePage */}

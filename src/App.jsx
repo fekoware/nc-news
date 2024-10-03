@@ -8,14 +8,69 @@ import { ErrorPage } from "./components/ErrorPage";
 import { TopicListPage } from "./components/TopicListPage";
 import { AddArticlePage } from "./components/AddArticlePage";
 import { Users } from "./components/Users";
+import { UserPage } from "./components/UserPage";
+import { useEffect } from "react";
+import { fetchUsers } from "./api";
+import { TopicsList } from "./components/TopicsList";
 
 function App() {
-  const [username, setUsername] = useState("jessjelly"); // Lifted username state
+  const [username, setUsername] = useState("jessjelly");
+  const [users, setUsers] = useState([]);
+  console.log(username, "username")
+
+  useEffect(() => {
+    fetchUsers()
+      .then((data) => {
+        console.log(data);
+        setUsers(data)
+        data.map((user) => {
+          if (username === user.username) {
+            setUsername(user.username);
+          }
+        });
+      })
+      .catch((err) => {
+        console.log(err, "an error");
+      });
+  }, [username]);
+
+  const handleUserChange = (event) => {
+    setUsername(event.target.value);
+  };
+
 
   return (
     <>
+
+
+
+
+    <div class="py-4">
+        <label class="font-bold"> Choose A User:</label>
+
+        <select value={username} onChange={handleUserChange}>
+          {users.map((user) => {
+            return (
+              <option value={user.username} key={user.username}>
+                {user.username}
+              </option>
+            );
+          })}
+        </select>
+        <br></br>
+
+    </div>
+
+    
+  
+  
       <div className="flex text-center justify-center items-center">
-        <Header username={username} setUsername={setUsername} /> {/* Pass username to Header */}
+        <Header username={username} setUsername={setUsername} />
+      </div>
+
+      <div className="flex items-center justify-center w-full p-5 bg-red-500">
+        <TopicsList />
+     
       </div>
       <Routes>
         <Route path="/users" element={<Users />} />
@@ -25,7 +80,9 @@ function App() {
         <Route path="/articles/:topicSlug/:article_id" element={<SingleArticle username={username}/>} />
         <Route path="*" element={<ErrorPage />} />
         <Route path="/topics" element={<TopicListPage />} />
-        <Route path="/add-article" element={<AddArticlePage username={username} />} /> {/* Pass username to AddArticlePage */}
+        <Route path="/add-article" element={<AddArticlePage username={username} />} />
+        <Route path="/user-details" element={<UserPage username={username} setUsername={setUsername} />} />
+
       </Routes>
     </>
   );

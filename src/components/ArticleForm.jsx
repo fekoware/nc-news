@@ -1,6 +1,7 @@
 import { TopicsList } from "./TopicsList";
 import { useState } from "react";
 import { postArticle } from "../api";
+import { TopicForm } from "./TopicForm";
 
 export const ArticleForm = ({ username }) => {
   const [titleInput, setTitleInput] = useState("");
@@ -80,6 +81,7 @@ export const ArticleForm = ({ username }) => {
             onChange={handleURLChange}
             value={imageURL}
           />
+
 
           <label>Topic:</label>
           <select onChange={handleTopicChange} value={topicInput}>

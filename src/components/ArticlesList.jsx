@@ -70,9 +70,7 @@ export const ArticlesList = ({username}) => {
   return (
     articles && (
       <div className="w-full">
-        <div className="flex flex-wrap items-center justify-center w-full p-5 bg-red-500">
-          <TopicsList />
-        </div>
+       
 
         <form className="flex flex-wrap items-center justify-center w-full p-5">
           <div className="px-4">

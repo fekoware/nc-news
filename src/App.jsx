@@ -12,21 +12,21 @@ import { UserPage } from "./components/UserPage";
 import { useEffect } from "react";
 import { fetchUsers } from "./api";
 import { TopicsList } from "./components/TopicsList";
+import { Link } from "react-router-dom";
 
 function App() {
   const [username, setUsername] = useState("jessjelly");
   const [users, setUsers] = useState([]);
+  const [user, setUser] = useState([]);
 
   useEffect(() => {
     fetchUsers()
       .then((data) => {
-        console.log(data, "data fetched")
         setUsers(data);
         data.map((user) => {
-          console.log(user.username, "should be a single user")
-          console.log(username, "user logged in")
           if (username === user.username) {
             setUsername(user.username);
+            setUser(user);
           }
         });
       })
@@ -41,28 +41,42 @@ function App() {
 
   return (
     <>
-      <div class="py-4">
-        <label class="font-bold"> Choose A User:</label>
+      <div class="grid grid-cols-2 gap-4 ">
+        <div class="flex flex-wrap w-full">
+          <Link to={"/"} > 
+          <h2 class="font-bold p-4 text-xl "> Mayowa's News</h2>
+          </Link>
+        </div>
 
-        <select value={username} onChange={handleUserChange}>
-          {users.map((user) => {
-            return (
-              <option value={user.username} key={user.username}>
-                {user.username}
-              </option>
-            );
-          })}
-        </select>
-        <br></br>
+        <div class="flex flex-wrap w-full justify-end pr-4 items-center">
+          <select class='w-auto'value={username} onChange={handleUserChange}>
+            {users.map((user) => {
+              return (
+                <option value={user.username} key={user.username}>
+                  {user.username}
+                </option>
+              );
+            })}
+          </select>
+
+          <Link to={"/user-details"}>
+            <button>
+              <img className="w-10 h-10" src={user.avatar_url} />
+            </button>
+          </Link>
+        </div>
       </div>
 
-      <div className="flex text-center justify-center items-center">
-        <Header username={username} setUsername={setUsername} />
-      </div>
+      <div class="flex flex-wrap w-full justify-end pr-4"></div>
 
       <div className="flex items-center justify-center w-full p-5 bg-red-500">
         <TopicsList />
       </div>
+
+      <div className="flex text-center justify-center items-center">
+        <Header user={user} username={username} setUsername={setUsername} />
+      </div>
+
       <Routes>
         <Route path="/users" element={<Users />} />
         <Route path="/" element={<ArticlesList username={username} />} />

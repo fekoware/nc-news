@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { fetchTopics } from "../api";
 import { TopicButton } from "./TopicButton";
-import { Link } from "react-router-dom";
+import { fetchArticles } from "../api";
 
 export const TopicsList = () => {
   const [topics, setTopics] = useState([]);
@@ -12,18 +12,22 @@ export const TopicsList = () => {
     fetchTopics().then((data) => {
       setTopics(data);
     });
+
+
   }, [topics]);
 
   return (
     <div className="flex flex-wrap ">
-      <ul className="flex flex-wrap">
+      <ul className="flex  text-white  flex-wrap">
         {topics.map((topic) => {
           return (
-            <li key={topic.slug} >
+            <li key={topic.slug} > |
               <TopicButton topic={topic} />
+              
             </li>
           );
         })}
+        |
       </ul>
     </div>
   );

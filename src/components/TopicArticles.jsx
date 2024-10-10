@@ -5,7 +5,6 @@ import { ArticlesCard } from "./ArticlesCard";
 import { TopicsList } from "./TopicsList";
 import { useSearchParams } from "react-router-dom";
 
-
 export const TopicArticles = () => {
   const { topicSlug } = useParams();
   const [articles, setArticles] = useState([]);
@@ -14,28 +13,24 @@ export const TopicArticles = () => {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-  setIsLoading(true)
+    setIsLoading(true);
     const sortBy = searchParams.get("sort_by") || "created_at";
     const order = searchParams.get("order") || "desc";
 
-
-    fetchArticles({   sort_by: sortBy, order: order })
+    fetchArticles({ sort_by: sortBy, order: order })
       .then((articles) => {
-        
-        let topicArticles = []
+        let topicArticles = [];
         articles.forEach((article) => {
           if (article.topic === topicSlug) {
-            topicArticles.push(article)
-          } 
-        })
+            topicArticles.push(article);
+          }
+        });
         setArticles(topicArticles);
-        setIsLoading(false)
-
+        setIsLoading(false);
       })
       .catch((err) => {
-
-        console.log(err)
-        setIsError(true)
+        console.log(err);
+        setIsError(true);
       });
   }, [topicSlug, searchParams]);
 
@@ -78,10 +73,6 @@ export const TopicArticles = () => {
   return (
     articles && (
       <div className="w-full">
-        <div className="flex flex-wrap items-center justify-center w-full p-5 bg-red-500">
-          <TopicsList />
-        </div>
-  
         <form className="flex  items-center justify-center w-full p-5">
           <div className="px-4">
             <label>Sort By: </label>
@@ -95,7 +86,7 @@ export const TopicArticles = () => {
               <option value="votes">Likes</option>
             </select>
           </div>
-  
+
           <div className="px-4">
             <label>Order: </label>
             <select
@@ -109,7 +100,7 @@ export const TopicArticles = () => {
             </select>
           </div>
         </form>
-  
+
         <div className="flex items-center justify-center">
           <ul className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 h-1/6 gap-4">
             {articles.map((article) => (
@@ -124,15 +115,7 @@ export const TopicArticles = () => {
       </div>
     )
   );
-}  
-
-
-
-
-
-
-
-
+};
 
 /*
 

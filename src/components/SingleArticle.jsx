@@ -124,6 +124,7 @@ export const SingleArticle = () => {
             username={username}
             setUsername={setUsername}
             comments={comments}
+            
             setComments={setComments}
           />
         </div>

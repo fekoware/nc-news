@@ -4,11 +4,13 @@ import { fetchCommentsByArticleId } from "../api";
 import { useEffect } from "react";
 import { CommentCard } from "./CommentCard";
 
-export const ArticleCommentsList = ({ username, setUsername, comments, setComments}) => {
+export const ArticleCommentsList = ({ username}) => {
   const { article_id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [comments, setComments] = useState("");
   
+
  
 
   useEffect(() => {
@@ -45,7 +47,7 @@ export const ArticleCommentsList = ({ username, setUsername, comments, setCommen
     comments && (
       <ul className="comments-list">
         {comments.map((comment) => (
-          <CommentCard username={username} comment={comment} key={comment.comment_id} />
+          <CommentCard username={username} comment={comment} article_id={article_id} key={comment.comment_id} />
         ))}
       </ul>
     )

@@ -15,7 +15,7 @@ export const ArticlesList = ({username}) => {
   const [isError, setIsError] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  console.log(username)
+
   useEffect(() => {
     const sortBy = searchParams.get("sort_by") || "created_at";
     const order = searchParams.get("order") || "desc";

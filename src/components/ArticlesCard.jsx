@@ -11,7 +11,6 @@ export const ArticlesCard = ({ username, article }) => {
 
   const handleDelete = (event, articleID) => {
     event.preventDefault();
-    console.log(article.article_id)
     deleteArticle(article.article_id)
       .then((data) => {
         setIsDeleted(true);
@@ -26,8 +25,6 @@ export const ArticlesCard = ({ username, article }) => {
     <div class=" flex flex-wrap w-full items-center my-4">
       {!isDeleted ? (
         <>
-          {console.log(username)}
-
           <li key={article.article_id}>
             <img
               class={

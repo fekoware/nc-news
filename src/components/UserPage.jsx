@@ -31,5 +31,13 @@ export const UserPage = ({ username, setUsername }) => {
   // iterate through users. if username selected matches
   // the user, display the user details in the database
   console.log(user.name, "hello");
-  return <img src={user.avatar_url} alt={`${user.name}'s avatar`} />
+  return (
+
+    <div className="flex text-center justify-center items-center">
+  <p>{user.name}</p>
+  <p>{user.username}</p>
+  <img src={user.avatar_url} alt={`${user.name}'s avatar`} />
+  </div>
+
+  )
 };

@@ -1,21 +1,17 @@
 import axios from "axios";
 import { SingleArticle } from "./components/SingleArticle";
+import { comment } from "postcss";
 
 const apiClient = axios.create({
   baseURL: "https://nc-news-3wpg.onrender.com/api",
 });
 
 export const fetchArticles = (params = {}) => {
-
   return apiClient
     .get("/articles", { params })
-    
+
     .then((response) => {
-    
-      console.log(params, "fetch artiles")
-      console.log(response.data.articles)
       return response.data.articles;
-      
     })
     .catch((err) => {
       console.log(err);
@@ -60,7 +56,6 @@ export const fetchUsers = () => {
   return apiClient
     .get("/users")
     .then((response) => {
-
       return response.data.users;
     })
     .catch((err) => {
@@ -74,7 +69,6 @@ export const postComment = (username, body, article_id) => {
     article_id: article_id,
     username: username,
     body: body,
-
   };
 
   return apiClient
@@ -112,43 +106,50 @@ export const fetchTopics = () => {
 export const postTopic = (slug, description) => {
   const topicObj = {
     slug: slug,
-    description: description
+    description: description,
+  };
+
+  return apiClient
+    .post("/topics", topicObj)
+    .then((response) => {
+      console.log(response.data);
+      return response.data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const postArticle = (
+  username,
+  title,
+  body,
+  topic,
+  article_img_url = null
+) => {
+  if (article_img_url === "" || !article_img_url.includes("https://")) {
+    article_img_url = `https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?w=700&h=700`;
   }
 
-  return apiClient.post('/topics', topicObj).then((response) => {
-    console.log(response.data)
-    return response.data
-  }).catch((err) => {
-    console.log(err)
-  })
-}
-
-
-export const postArticle = (username, title, body, topic, article_img_url = null) => {
-
-  if (article_img_url === '' || !article_img_url.includes('https://')) {
-
-
-    article_img_url = `https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?w=700&h=700`
-  }
-  
   const articleObj = {
     author: username,
     title: title,
     body: body,
     topic: topic,
-    article_img_url: article_img_url
-  }
-  console.log(articleObj)
+    article_img_url: article_img_url,
+  };
+  console.log(articleObj);
 
-  return apiClient.post('/articles', articleObj).then((response) => {
-    console.log(response.data)
-    return response.data
-  }).catch((err) => {
-    console.log(err)
-  })
-}
-
+  return apiClient
+    .post("/articles", articleObj)
+    .then((response) => {
+      console.log(response.data);
+      return response.data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 export const deleteArticle = (article_id) => {
   const articleObj = {
@@ -164,4 +165,18 @@ export const deleteArticle = (article_id) => {
     .catch((err) => {
       console.log(err);
     });
-}
+};
+
+export const updateCommentVotes = (votes, article_id, comment_id) => {
+  
+console.log(article_id,votes, comment_id)
+
+  return apiClient
+    .patch(`/articles/${article_id}/comments/${comment_id}`, votes)
+    .then((response) => {
+      console.log(response.data.article.votes, "comment increment");
+      return response.data.article.votes;
+    }).catch((err) => {
+      console.log(err)
+    });
+};

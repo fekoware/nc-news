@@ -41,40 +41,54 @@ function App() {
 
   return (
     <>
-      <div class="grid grid-cols-2 gap-4 ">
-        <div class="flex flex-wrap w-full">
-          <Link to={"/"} > 
-          <h2 class="font-bold p-4 text-xl "> Mayowa's News</h2>
-          </Link>
-        </div>
+      <div>
+        <div className="grid grid-cols-2 gap-4">
 
-        <div class="flex flex-wrap w-full justify-end pr-4 items-center">
-          <select class='w-auto'value={username} onChange={handleUserChange}>
-            {users.map((user) => {
-              return (
+          <div className="flex flex-wrap w-full">
+            <Link to={"/"}>
+              <h2 className="font-bold p-4 text-xl transition-colors duration-200 ease-in-out hover:underline cursor-pointer">
+                Mayowa's News
+              </h2>
+            </Link>
+          </div>
+
+
+          <div className="flex flex-wrap w-full justify-end pr-4 items-center">
+            <select
+              className="w-auto border-2 hover:underline border-gray-300 rounded-md p-2"
+              value={username}
+              onChange={handleUserChange}
+            >
+              {users.map((user) => (
                 <option value={user.username} key={user.username}>
                   {user.username}
                 </option>
-              );
-            })}
-          </select>
+              ))}
+            </select>
 
-          <Link to={"/user-details"}>
-            <button>
-              <img className="w-10 h-10" src={user.avatar_url} />
-            </button>
-          </Link>
+            <Link to={"/user-details"}>
+              <button className="ml-4">
+                <img
+                  className="w-10 h-10 rounded-full transition-transform duration-200 ease-in-out hover:scale-110 hover:opacity-80 cursor-pointer"
+                  src={user.avatar_url}
+                  alt="User Avatar"
+                />
+              </button>
+            </Link>
+          </div>
         </div>
-      </div>
 
-      <div class="flex flex-wrap w-full justify-end pr-4"></div>
 
-      <div className="flex items-center justify-center w-full p-5 bg-red-500">
-        <TopicsList />
-      </div>
+        <div className="flex items-center justify-center w-full p-5 bg-red-500">
+          <div class="grid grid-cols-1">
+            <TopicsList />
+          </div>
+        </div>
 
-      <div className="flex text-center justify-center items-center">
-        <Header user={user} username={username} setUsername={setUsername} />
+
+        <div className="flex text-center justify-center py-2 items-center">
+          <Header user={user} username={username} setUsername={setUsername} />
+        </div>
       </div>
 
       <Routes>

@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchArticles } from "../api";
 import { ArticlesCard } from "./ArticlesCard";
-import { TopicsList } from "./TopicsList";
 import { useSearchParams } from "react-router-dom";
 
 export const TopicArticles = () => {
@@ -19,17 +18,14 @@ export const TopicArticles = () => {
 
     fetchArticles({ sort_by: sortBy, order: order })
       .then((articles) => {
-        let topicArticles = [];
-        articles.forEach((article) => {
-          if (article.topic === topicSlug) {
-            topicArticles.push(article);
-          }
-        });
+        const topicArticles = articles.filter(
+          (article) => article.topic === topicSlug
+        );
         setArticles(topicArticles);
         setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         setIsError(true);
       });
   }, [topicSlug, searchParams]);
@@ -45,9 +41,9 @@ export const TopicArticles = () => {
 
   if (isError) {
     return (
-      <div class="flex flex-col justify-center items-center h-screen space-y-4">
-        <h1 class="text-xl font-bold">
-          Error loading articles, refresh this page
+      <div className="flex flex-col justify-center items-center h-screen space-y-4">
+        <h1 className="text-xl font-bold">
+          Error loading articles, refresh the page
         </h1>
       </div>
     );
@@ -55,7 +51,6 @@ export const TopicArticles = () => {
 
   const handleSortByChange = (event) => {
     const sortBy = event.target.value;
-    console.log(sortBy);
     setSearchParams({
       sort_by: sortBy,
       order: searchParams.get("order") || "desc",
@@ -73,11 +68,11 @@ export const TopicArticles = () => {
   return (
     articles && (
       <div className="w-full">
-        <form className="flex  items-center justify-center w-full p-5">
+        <form className="flex items-center justify-center w-full py-4 px-2">
           <div className="px-4">
-            <label>Sort By: </label>
+            <label className="font-semibold">Sort By: </label>
             <select
-              className="hover:underline"
+              className="border border-gray-300 px-2 py-1 rounded-lg hover:underline"
               value={searchParams.get("sort_by") || "created_at"}
               onChange={handleSortByChange}
             >
@@ -88,9 +83,9 @@ export const TopicArticles = () => {
           </div>
 
           <div className="px-4">
-            <label>Order: </label>
+            <label className="font-semibold">Order: </label>
             <select
-              className="hover:underline"
+              className="border border-gray-300 px-2 py-1 rounded-lg hover:underline"
               value={searchParams.get("order") || "desc"}
               onChange={handleSortOrderChange}
             >
@@ -102,12 +97,11 @@ export const TopicArticles = () => {
         </form>
 
         <div className="flex items-center justify-center">
-          <ul className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 h-1/6 gap-4">
+
+          <ul className="grid grid-cols-1 gap-6 p-4">
             {articles.map((article) => (
               <li key={article.article_id} className="flex justify-stretch">
-                <div className="flex flex-col">
-                  <ArticlesCard article={article} />
-                </div>
+                <ArticlesCard article={article} />
               </li>
             ))}
           </ul>
@@ -116,36 +110,3 @@ export const TopicArticles = () => {
     )
   );
 };
-
-/*
-
-sorting articles by queries
-  "author",
-  "topic",
-  "sort_by",
-  "order"
-
-order by ascending or descending
-
-  components
-  Articles List
-    states = queryParam, setQueryParam
-    searchParams
-
-  props
-
-  input
-
-  process
-
-  output
-
-  there will be a dropdown list of options to sort by with default of ascending
-  when a choice is pressed, onclick will handle the change to sort by the choice
-  useeffect will have the handlechange function inside
-
-  handleChange will sort the articles by the order and 
-
-
-
-*/

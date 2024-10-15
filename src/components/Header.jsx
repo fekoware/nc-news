@@ -1,16 +1,15 @@
 import { Users } from "./Users";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export const Header = ({ user }) => {
   return (
     <div>
-      <div class="grid grid-cols-1">
-
+      <div>
         <Link to={"/add-article"}>
-          <button> Add Article</button>
+          <button className="bg-red-500 text-white font-semibold px-4 py-2 rounded-md transition-transform duration-200 ease-in-out hover:opacity-80">
+            Add Article
+          </button>
         </Link>
-
       </div>
     </div>
   );

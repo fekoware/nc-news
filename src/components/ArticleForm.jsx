@@ -87,9 +87,13 @@ export const ArticleForm = ({ username }) => {
             onChange={handleTopicChange}
             value={topicInput}
           >
+
+          
             <option value="">Select Topic</option>
             <option value="cooking">Cooking</option>
-            <option value="topic2">Topic 2</option>
+            <option value="football">Football</option>
+            <option value="football">Coding</option>
+
           </select>
 
           <button

@@ -42,7 +42,7 @@ function App() {
   return (
     <>
       <div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 gap-4">
 
           <div className="flex flex-wrap w-full">
             <Link to={"/"}>
@@ -51,6 +51,17 @@ function App() {
               </h2>
             </Link>
           </div>
+
+          <div class='flex flex-wrap items-center justify-center'>
+        <Link to={"/add-article"}>
+          <button className="bg-red-500 text-white font-semibold px-4 py-2 rounded-md transition-transform duration-200 ease-in-out hover:opacity-80">
+            Add Article
+          </button>
+        </Link>
+      </div>
+
+
+          
 
 
           <div className="flex flex-wrap w-full justify-end pr-4 items-center">

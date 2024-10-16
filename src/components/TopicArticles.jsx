@@ -4,7 +4,7 @@ import { fetchArticles } from "../api";
 import { ArticlesCard } from "./ArticlesCard";
 import { useSearchParams } from "react-router-dom";
 
-export const TopicArticles = () => {
+export const TopicArticles = ({username}) => {
   const { topicSlug } = useParams();
   const [articles, setArticles] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -101,7 +101,7 @@ export const TopicArticles = () => {
           <ul className="grid grid-cols-1 gap-6 p-4">
             {articles.map((article) => (
               <li key={article.article_id} className="flex justify-stretch">
-                <ArticlesCard article={article} />
+                <ArticlesCard username={username} article={article} />
               </li>
             ))}
           </ul>

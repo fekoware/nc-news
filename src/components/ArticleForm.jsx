@@ -93,7 +93,6 @@ export const ArticleForm = ({ username }) => {
             <option value="cooking">Cooking</option>
             <option value="football">Football</option>
             <option value="football">Coding</option>
-
           </select>
 
           <button

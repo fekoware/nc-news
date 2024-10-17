@@ -3,7 +3,7 @@ import { SingleArticle } from "./components/SingleArticle";
 import { comment } from "postcss";
 
 const apiClient = axios.create({
-  baseURL: "https://nc-news-3wpg.onrender.com/api",
+  baseURL: "https://nc-news-be-1.onrender.com/api",
 });
 
 export const fetchArticles = (params = {}) => {

@@ -42,8 +42,10 @@ function App() {
   return (
     <>
       <div>
-        <div className="grid grid-cols-3 gap-4">
 
+
+
+        <div className="grid grid-cols-2 gap-4">
           <div className="flex flex-wrap w-full">
             <Link to={"/"}>
               <h2 className="font-bold p-4 text-xl transition-colors duration-200 ease-in-out hover:underline cursor-pointer">
@@ -52,21 +54,11 @@ function App() {
             </Link>
           </div>
 
-          <div class='flex flex-wrap items-center justify-center'>
-        <Link to={"/add-article"}>
-          <button className="bg-red-500 text-white font-semibold px-4 py-2 rounded-md transition-transform duration-200 ease-in-out hover:opacity-80">
-            Add Article
-          </button>
-        </Link>
-      </div>
-
-
-          
-
+         
 
           <div className="flex flex-wrap w-full justify-end pr-4 items-center">
             <select
-              className="w-auto border-2 hover:underline border-gray-300 rounded-md p-2"
+              className=" flex flex-wrap w-auto border-2 hover:underline border-gray-300 rounded-md p-2"
               value={username}
               onChange={handleUserChange}
             >
@@ -78,26 +70,37 @@ function App() {
             </select>
 
             <Link to={"/user-details"}>
-              <button className="ml-4">
+              <button className="flex flex-wrap ">
                 <img
-                  className="w-10 h-10 rounded-full transition-transform duration-200 ease-in-out hover:scale-110 hover:opacity-80 cursor-pointer"
+                  className="w-10 h-10 pl-2 rounded-full transition-transform duration-200 ease-in-out hover:scale-110 hover:opacity-80 cursor-pointer"
                   src={user.avatar_url}
                   alt="User Avatar"
                 />
               </button>
             </Link>
           </div>
+
+          
+
+
         </div>
 
+        <div className="fixed bottom-0 left-0 right-0 flex p-4 flex-wrap items-center justify-end shadow-lg z-50">
 
-        <div className="flex items-center justify-center w-full p-5 bg-red-500">
+            <Link to={"/add-article"}>
+              <button className="bg-red-500 text-white font-semibold px-4 py-2 rounded-md transition-transform duration-200 ease-in-out hover:opacity-80">
+                Add Article
+              </button>
+            </Link>
+          </div>
+
+        <div className="flex items-center justify-center w-full p-4 bg-red-500">
           <div class="grid grid-cols-1">
             <TopicsList />
           </div>
         </div>
 
-
-        <div className="flex text-center justify-center py-2 items-center">
+        <div className="flex text-center justify-center items-center">
           <Header user={user} username={username} setUsername={setUsername} />
         </div>
       </div>

@@ -68,6 +68,7 @@ export const TopicArticles = ({username}) => {
   return (
     articles && (
       <div className="w-full">
+        
         <form className="flex items-center justify-center w-full py-4 px-2">
           <div className="px-4">
             <label className="font-semibold">Sort By: </label>
@@ -76,8 +77,8 @@ export const TopicArticles = ({username}) => {
               value={searchParams.get("sort_by") || "created_at"}
               onChange={handleSortByChange}
             >
-              <option>Select One</option>
-              <option value="created_at">Date</option>
+            <option value="" disabled hidden>Select One</option>
+            <option value="created_at">Date</option>
               <option value="votes">Likes</option>
             </select>
           </div>
@@ -89,8 +90,8 @@ export const TopicArticles = ({username}) => {
               value={searchParams.get("order") || "desc"}
               onChange={handleSortOrderChange}
             >
-              <option>Select One</option>
-              <option value="asc">Ascending</option>
+            <option value="" disabled hidden>Select One</option>
+            <option value="asc">Ascending</option>
               <option value="desc">Descending</option>
             </select>
           </div>

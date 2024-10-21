@@ -7,6 +7,8 @@ export const ArticleForm = ({ username }) => {
   const [bodyInput, setBodyInput] = useState("");
   const [imageURL, setImageURL] = useState("");
   const [topicInput, setTopicInput] = useState("");
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleTitleChange = (event) => {
     setTitleInput(event.target.value);
@@ -32,26 +34,32 @@ export const ArticleForm = ({ username }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    if (!titleInput || !bodyInput || !topicInput) {
+      setError("Title, Body, and Topic must not be empty.");
+      setSuccessMessage(""); // Clear success message if there's an error
+      return;
+    }
+
+    setError("");
+
     postArticle(username, titleInput, bodyInput, topicInput, imageURL)
       .then((data) => {
         console.log("Article posted:", data);
+        setSuccessMessage("Article has been successfully posted!"); // Set success message
+        setTitleInput("");
+        setBodyInput("");
+        setTopicInput("");
+        setImageURL("");
       })
       .catch((err) => {
         console.log("Error posting article:", err);
+        setError("Failed to post the article. Please try again."); // Set error message
       });
-
-    setTitleInput("");
-    setBodyInput("");
-    setTopicInput("");
-    setImageURL("");
-    event.target.style.height = "auto";
   };
 
   return (
     <div>
-
-
-      <div className="flex flex-wrap w-full justify-center">
+      <div className="flex flex-wrap w-full justify-center p-4">
         <form onSubmit={handleSubmit} className="w-full lg:w-1/2">
           <label className="w-full font-bold text-lg mb-2 block">Title</label>
           <input
@@ -87,14 +95,18 @@ export const ArticleForm = ({ username }) => {
             onChange={handleTopicChange}
             value={topicInput}
           >
-
-          
-            <option value="">Select Topic</option>
+            <option value="" disabled hidden>Select Topic</option>
             <option value="cooking">Cooking</option>
             <option value="football">Football</option>
-            <option value="football">Coding</option>
-
+            <option value="coding">Coding</option>
           </select>
+
+          {error && (
+            <p className="text-red-600 mb-4">{error}</p>
+          )}
+          {successMessage && (
+            <p className="text-green-600 mb-4">{successMessage}</p> // Success message
+          )}
 
           <button
             type="submit"

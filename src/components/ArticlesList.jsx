@@ -62,7 +62,7 @@ export const ArticlesList = ({ username }) => {
 
   return (
     <div className="w-full">
-      <form className="flex flex-wrap items-center justify-center w-full p-5">
+      <form className="flex items-center justify-center w-full py-4 px-2">
         <div className="px-4">
           <label className="font-semibold">Sort By: </label>
           <select
@@ -70,7 +70,7 @@ export const ArticlesList = ({ username }) => {
             value={searchParams.get("sort_by") || "created_at"}
             onChange={handleSortByChange}
           >
-            <option>Select One</option>
+            <option value="" disabled hidden>Select One</option>
             <option value="created_at">Date</option>
             <option value="votes">Likes</option>
           </select>
@@ -83,7 +83,7 @@ export const ArticlesList = ({ username }) => {
             value={searchParams.get("order") || "desc"}
             onChange={handleSortOrderChange}
           >
-            <option>Select One</option>
+            <option value="" disabled hidden>Select One</option>
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
           </select>
@@ -91,7 +91,7 @@ export const ArticlesList = ({ username }) => {
       </form>
 
       <div className="flex items-center justify-center">
-        <ul className="grid grid-cols-1  gap-4">
+        <ul className="grid grid-cols-1 gap-6 p-4">
           {articles.map((article) => (
             <li key={article.article_id} className="flex justify-stretch">
               <ArticlesCard username={username} article={article} />

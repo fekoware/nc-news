@@ -45,7 +45,7 @@ export const ArticleForm = ({ username }) => {
     postArticle(username, titleInput, bodyInput, topicInput, imageURL)
       .then((data) => {
         console.log("Article posted:", data);
-        setSuccessMessage("Article has been successfully posted!"); // Set success message
+        setSuccessMessage("Article has been successfully posted!"); 
         setTitleInput("");
         setBodyInput("");
         setTopicInput("");
@@ -53,7 +53,7 @@ export const ArticleForm = ({ username }) => {
       })
       .catch((err) => {
         console.log("Error posting article:", err);
-        setError("Failed to post the article. Please try again."); // Set error message
+        setError("Failed to post the article. Please try again."); 
       });
   };
 
@@ -105,12 +105,12 @@ export const ArticleForm = ({ username }) => {
             <p className="text-red-600 mb-4">{error}</p>
           )}
           {successMessage && (
-            <p className="text-green-600 mb-4">{successMessage}</p> // Success message
+            <p className="text-green-600 mb-4">{successMessage}</p> 
           )}
 
           <button
             type="submit"
-            className="bg-blue-500 w-full text-white font-semibold px-4 py-2 rounded-md transition-opacity duration-200 ease-in-out hover:opacity-80 active:opacity-100"
+            className="bg-blue-500 w-full text-white font-semibold px-4 py-2 mb-10 rounded-md transition-opacity duration-200 ease-in-out hover:opacity-80 active:opacity-100"
           >
             Post Article
           </button>

@@ -1,5 +1,7 @@
 # NC News Frontend
 
+View and interact with projects [here](https://https://mynewswebapp.netlify.app/) - it may take about 5 minutes to load due to server restrictions - the budget for this project was £0! 
+
 This repository contains the frontend of **NC News**, a news aggregation web application where users can browse, read, and interact with articles. This project is built using React, Tailwind CSS, and communicates with the NC News Backend API I created, located [here](https://github.com/fekoware/nc-news-be).
 
 ## Project Overview
